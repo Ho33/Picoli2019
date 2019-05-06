@@ -16,19 +16,22 @@ public class ParaUI extends UI {
 
 	public ParaUI() {
 		super();
+		estado.pasarPeriodo();
+		setDatosEnElInterfazUsuario(estado.getDatosPoblacion(), estado.getDatosEstadoLocal(),
+				estado.getDatosEstadoGlobales());
 	}
 
 	public void listener() {
 
 		getBtnPasarPeriodo().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				estado.pasarPeriodo();
 			}
 		});
 
 		getBtnIncrementoDemanda().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 
@@ -36,8 +39,8 @@ public class ParaUI extends UI {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-}
-  
+	}
+
 	public void setDatosEnElInterfazUsuario(DatosPoblacion datosPoblacion, DatosEstadoLocal datosEstadoLocal,
 			DatosEstadoGlobal datosEstadoGlobal) {
 		rellenarComunicador(comunicadorPoblacion, datosPoblacion);
