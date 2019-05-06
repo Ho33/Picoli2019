@@ -3,6 +3,7 @@ package control;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Stack;
 
 import modelo.empresa.DineroEstado;
@@ -60,12 +61,37 @@ public class Sede {
 		return factorias;
 	}
 
-	public void numTrabajadores() {
+	private int numTrabajadores() {
 		int contador = 0;
 		for (Factorias factoria : factorias) {
 			contador = contador + factoria.getPilaTrabajador().size();
 		}
+		return contador;
 	}
+	
+	public void gestionarCierreFactorias(ArrayDeque<Seres> demandantes) {
+		int ocupacionMaxima = 1000;
+		for (Iterator iterator = factorias.iterator(); iterator.hasNext();) {
+			Factorias empresa = (Factorias) iterator.next();
+			int numTrabajadores = empresa.getPilaTrabajador().size();
+			float porcentajeOcupado = (numTrabajadores * 100) / ocupacionMaxima;
+			if(porcentajeOcupado<=0.3) {
+				despedirTrabajadores(demandantes, empresa);
+				factorias.remove(empresa);
+				}
+				
+			}
+			
+			
+		}
+
+	private void despedirTrabajadores(ArrayDeque<Seres> demandantes, Factorias empresa) {
+		for (int i = 0; i < empresa.getPilaTrabajador().size(); i++) {
+			Seres trabajador = empresa.getPilaTrabajador().pop();
+			demandantes.offer(trabajador);
+		}
+	}
+	
 
 	public ArrayList<Factorias> getFactorias() {
 		return factorias;
