@@ -27,6 +27,7 @@ public class Factorias {
 		return empleados;
 
 	}
+	
 
 	public void pagarTrabajador(DineroEstado dinero) {
 		float pagar = (float) (EstadoSer.trabajador.getSueldo());
@@ -50,6 +51,11 @@ public class Factorias {
 
 	public void setPilaTrabajador(Stack<Seres> pilaTrabajador) {
 		this.pilaTrabajador = pilaTrabajador;
+	}
+
+	public void setContratarTrabajador(Seres ser) {
+		this.pilaTrabajador.add(ser);
+		
 	}
 
 }

@@ -383,5 +383,16 @@ public class Poblacion {
 		}
 		return contador;
 	}
+	public ArrayList<Seres> getDesempleados() {
+		ArrayList<Seres> lista = new ArrayList<Seres>();
+		for (Iterator iterator = this.poblacion.iterator(); iterator.hasNext();) {
+			Seres ser = (Seres) iterator.next();
+			if (ser.getTipoEstado() == EstadoSer.desempleado) {
+				ser.setTipoEstado(EstadoSer.trabajador);;
+				lista.add(ser);
+			}
+		}
+		return lista;
+}
 
 }
