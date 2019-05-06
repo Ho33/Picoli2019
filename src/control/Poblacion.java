@@ -141,10 +141,10 @@ public class Poblacion {
 
 	public void pagarNVMenores(DineroEstado dinero) {
 		// Dinero que se le da a cada menor y se acumula en el ahorro
-		float nv = menores.get(0).getTipoEstado().getNivelVida();
+		float nv = 365;
 		float dineroTotalPagar = 0;
 		int contador = 0;
-		contador = contarTipoPersona(menores.get(0).getTipoEstado(), contador);
+		contador = contarTipoPersona(EstadoSer.menor, contador);
 		dineroTotalPagar = contador * nv;
 		if (dinero.getDineroTotal() >= dineroTotalPagar) {
 			for (int i = 0; i < this.poblacion.size(); i++) {
@@ -173,10 +173,10 @@ public class Poblacion {
 
 	public void pagarDemandantes(DineroEstado dinero) {
 		// Dinero que se le da a cada demandante y se acumula en el ahorro
-		float nv = demandantes.getFirst().getTipoEstado().getNivelVida();
+		float nv = 182.5f;
 		float dineroTotalPagar = 0;
 		int contador = 0;
-		contador = contarTipoPersona(demandantes.getFirst().getTipoEstado(), contador);
+		contador = contarTipoPersona(EstadoSer.desempleado, contador);
 		dineroTotalPagar = contador * nv / 2;
 		if (dinero.getDineroTotal() >= dineroTotalPagar) {
 			for (int i = 0; i < poblacion.size(); i++) {
@@ -200,10 +200,10 @@ public class Poblacion {
 
 	public void pagarJubilados(DineroEstado dinero) {
 		// Dinero que se le da a cada jubilado y se acumula en el ahorro
-		float nv = jubilados.get(0).getTipoEstado().getNivelVida();
+		float nv = 182.5f;
 		float dineroTotalPagar = 0;
 		int contador = 0;
-		contador = contarTipoPersona(jubilados.get(0).getTipoEstado(), contador);
+		contador = contarTipoPersona(EstadoSer.jubilado, contador);
 		dineroTotalPagar = deberJubilados();
 		if (dinero.getDineroTotal() >= dineroTotalPagar) {
 			for (int i = 0; i < poblacion.size(); i++) {
@@ -256,9 +256,9 @@ public class Poblacion {
 
 	public float deberJubilados() {
 		int contador = 0;
-		float nv = jubilados.get(0).getTipoEstado().getNivelVida();
+		float nv = 182.5f;
 		float acumulador = 0;
-		contador = contarTipoPersona(jubilados.get(0).getTipoEstado(), contador);
+		contador = contarTipoPersona(EstadoSer.jubilado, contador);
 		for (int i = 0; i < poblacion.size(); i++) {
 			if (poblacion.get(i).getTipoEstado() == poblacion.get(i).getTipoEstado().jubilado) {
 				if (pedirAhorro(poblacion, i) < nv) {
@@ -354,6 +354,34 @@ public class Poblacion {
 		double NumTrabajador = contarTipoPersona(EstadoSer.trabajador, 0);
 		double restantes = (this.demandantes.size() + this.jubilados.size()) * 182.5;
 		return restantes + NumMenores + NumTrabajador;
+	}
+
+	public int numeroMenores() {
+		int contador = 0;
+		for (int i = 0; i < poblacion.size(); i++) {
+			if (poblacion.get(i).getTipoEstado() == EstadoSer.menor) {
+				contador++;
+			}
+		}
+		return contador;
+	}
+
+	public int numeroJubilados() {
+		int contador = 0;
+		for (int i = 0; i < poblacion.size(); i++) {
+			if (poblacion.get(i).getTipoEstado() == EstadoSer.jubilado) {
+				contador++;
+			}
+		}
+		return contador;
+	}
+
+	public int numeroPoblacion() {
+		int contador = 0;
+		for (int i = 0; i < poblacion.size(); i++) {
+			contador++;
+		}
+		return contador;
 	}
 
 }
