@@ -281,7 +281,7 @@ public class Poblacion {
 		return morosos;
 	}
 
-	public boolean isFallecido() {
+	public boolean isFallecido(Seres ser) {
 		boolean resultado = false;
 		for (int i = 0; i < poblacion.size(); i++) {
 			if (poblacion.get(i).getEdad() >= poblacion.get(i).getEsperanzaVida()) {
@@ -296,7 +296,7 @@ public class Poblacion {
 		fallecidos.clear();
 		for (int i = 0; i < poblacion.size(); i++) {
 			Seres persona = poblacion.get(i);
-			if (isFallecido()) {
+			if (isFallecido(persona)) {
 				fallecidos.add(persona);
 				poblacion.remove(persona);
 				if (jubilados.contains(persona)) {
