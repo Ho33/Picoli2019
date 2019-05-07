@@ -16,9 +16,9 @@ class EstadoTest {
 	void testFallecimiento() {
 		Seres ser = new Seres();
 		if (ser.getEdad()>=ser.getEsperanzaVida()) {
-			assertEquals(true, poblacion.isFallecido());
+			assertEquals(true, poblacion.isFallecido(ser));
 		} else {
-			assertEquals(false, poblacion.isFallecido());
+			assertEquals(false, poblacion.isFallecido(ser));
 		}
 	}
 

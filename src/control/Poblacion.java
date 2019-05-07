@@ -28,13 +28,23 @@ public class Poblacion {
 		mayoresEdad = new ArrayList<>();
 
 		for (int i = 0; i < menoresInicial; i++) {
-			poblacion.add(new Seres(Utilies.obtenerAleatorio(0, 17), EstadoSer.menor));
+			Seres ser = new Seres();
+			ser = new Seres(Utilies.obtenerAleatorio(0, 17), EstadoSer.menor);
+			poblacion.add(ser);
+			menores.add(ser);
+			
 		}
 		for (int i = 0; i < trabajadoresIncial; i++) {
-			poblacion.add(new Seres(Utilies.obtenerAleatorio(18, 65), EstadoSer.trabajador));
+			Seres ser = new Seres();
+			ser = new Seres(Utilies.obtenerAleatorio(18, 64), EstadoSer.trabajador);
+			poblacion.add(ser);
+			menores.add(ser);
 		}
 		for (int i = 0; i < jubiladosInicial; i++) {
-			poblacion.add(new Seres(65, EstadoSer.jubilado));
+			Seres ser = new Seres();
+			ser = new Seres(Utilies.obtenerAleatorio(18, 64), EstadoSer.jubilado);
+			poblacion.add(ser);
+			menores.add(ser);
 		}
 	}
 
