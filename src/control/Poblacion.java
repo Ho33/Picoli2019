@@ -1,11 +1,8 @@
 package control;
 
-import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Stack;
-
 import modelo.empresa.DineroEstado;
 import modelo.poblacion.EstadoSer;
 import modelo.poblacion.Seres;
