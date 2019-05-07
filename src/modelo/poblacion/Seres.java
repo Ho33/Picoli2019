@@ -3,8 +3,11 @@ package modelo.poblacion;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import javax.swing.text.Utilities;
+
 import control.Estado;
 import control.Poblacion;
+import utilesglobal.Utilies;
 
 public class Seres {
 	private String nombre;
@@ -24,7 +27,7 @@ public class Seres {
 		this.nombre = generarNombreAleatorio(nombres);
 		this.edad = generarEdad();
 		this.ahorro = 0;
-		this.esperanzaVida = generarEsperanzaVida();
+		this.esperanzaVida = Utilies.obtenerAleatorio(90);
 		this.tipoEstado = EstadoSer.menor;
 	}
 
@@ -34,7 +37,7 @@ public class Seres {
 		this.id = sumarId();
 		this.edad = edad;
 		this.ahorro = 0;
-		this.esperanzaVida = generarEsperanzaVida();
+		this.esperanzaVida = Utilies.obtenerAleatorio(this.edad, 90);
 		this.tipoEstado = tipoEstado;
 	}
 
@@ -51,13 +54,6 @@ public class Seres {
 		return aleatorio;
 	}
 
-	public int generarEsperanzaVida() {
-		int esperanzaVidaMin = this.edad;
-		int esperanzaVidaMax = 90;
-		int esperanzaVida = (int) (Math.random() * (esperanzaVidaMax - esperanzaVidaMin) + esperanzaVidaMin);
-		return (int) esperanzaVida;
-	}
-
 	public void anadirNombresAlaLista(LinkedList<String> nombres) {
 		for (int i = 0; i < personas.length; i++) {
 			String nombresRecorridos = personas[i];
@@ -69,11 +65,6 @@ public class Seres {
 		edad = 0;
 		return (int) edad;
 
-	}
-
-	public int generarAhorro() {
-		ahorro = 0;
-		return (int) ahorro;
 	}
 
 	public void setEsperanzaVida(float esperanzaVida) {
