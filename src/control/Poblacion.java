@@ -28,24 +28,15 @@ public class Poblacion {
 		mayoresEdad = new ArrayList<>();
 
 		for (int i = 0; i < menoresInicial; i++) {
-			Seres ser = new Seres();
-			ser = new Seres(Utilies.obtenerAleatorio(0, 17), EstadoSer.menor);
-			poblacion.add(ser);
-			menores.add(ser);
-			
+			poblacion.add(new Seres(Utilies.obtenerAleatorio(0, 17), EstadoSer.menor));
 		}
 		for (int i = 0; i < trabajadoresIncial; i++) {
-			Seres ser = new Seres();
-			ser = new Seres(Utilies.obtenerAleatorio(18, 64), EstadoSer.trabajador);
-			poblacion.add(ser);
-			menores.add(ser);
+			poblacion.add(new Seres(Utilies.obtenerAleatorio(18, 65), EstadoSer.trabajador));
 		}
 		for (int i = 0; i < jubiladosInicial; i++) {
-			Seres ser = new Seres();
-			ser = new Seres(Utilies.obtenerAleatorio(65, 90), EstadoSer.jubilado);
-			poblacion.add(ser);
-			menores.add(ser);
+			poblacion.add(new Seres(65, EstadoSer.jubilado));
 		}
+
 	}
 
 	public void cambiarTipoHabitante() {
@@ -293,28 +284,29 @@ public class Poblacion {
 
 	public boolean isFallecido(Seres ser) {
 		boolean resultado = false;
-		for (int i = 0; i < poblacion.size(); i++) {
-			if (poblacion.get(i).getEdad() >= poblacion.get(i).getEsperanzaVida()) {
-				resultado = true;
-			}
-
+		if (ser.getEdad() >= ser.getEsperanzaVida()) {
+			resultado = true;
 		}
 		return resultado;
 	}
 
-	public ArrayList<Seres> eliminarFallecidos() {
-		fallecidos.clear();
-		for (int i = 0; i < poblacion.size(); i++) {
-			Seres persona = poblacion.get(i);
+	public int numeroFallecidos() {
+		int contador = 0;
+		for (int i = 0; i < this.poblacion.size(); i++) {
+			Seres persona = this.poblacion.get(i);
 			if (isFallecido(persona)) {
-				fallecidos.add(persona);
-				poblacion.remove(persona);
-				if (jubilados.contains(persona)) {
-					jubilados.remove(persona);
+				this.poblacion.remove(persona);
+				contador++;
+				if (this.jubilados.contains(persona)) {
+					this.jubilados.remove(persona);
 				}
 			}
 		}
-		return fallecidos;
+		return contador;
+	}
+
+	public int poblacionActual() {
+		return this.poblacion.size() - numeroFallecidos();
 	}
 
 	public void actualizarPoblacion() {
@@ -337,7 +329,7 @@ public class Poblacion {
 
 		}
 		jubilarTrabajador();
-		eliminarFallecidos();
+//		numeroFallecidos();
 		mayoresDeEdad();
 		annadirMayoresEdad();
 	}
@@ -347,7 +339,7 @@ public class Poblacion {
 		if (edad > 17 && edad < 65) {
 			valor = 1;
 		} else {
-			if (edad < 17) {
+			if (edad < 18) {
 				valor = 0;
 			} else {
 				valor = 2;
@@ -365,16 +357,20 @@ public class Poblacion {
 
 	public int numeroMenores() {
 		int contador = 0;
-		for (int i = 0; i < menores.size(); i++) {
+		for (int i = 0; i < poblacion.size(); i++) {
+			if (poblacion.get(i).getTipoEstado() == EstadoSer.menor) {
 				contador++;
+			}
 		}
 		return contador;
 	}
 
 	public int numeroJubilados() {
 		int contador = 0;
-		for (int i = 0; i < jubilados.size(); i++) {
+		for (int i = 0; i < poblacion.size(); i++) {
+			if (poblacion.get(i).getTipoEstado() == EstadoSer.jubilado) {
 				contador++;
+			}
 		}
 		return contador;
 	}
@@ -386,16 +382,28 @@ public class Poblacion {
 		}
 		return contador;
 	}
+
+	public int numeroTrabajo() {
+		int contador = 0;
+		for (int i = 0; i < this.poblacion.size(); i++) {
+			if (this.poblacion.get(i).getTipoEstado() == EstadoSer.trabajador) {
+				contador++;
+			}
+		}
+		return contador;
+	}
+
 	public ArrayList<Seres> getDesempleados() {
 		ArrayList<Seres> lista = new ArrayList<Seres>();
 		for (Iterator iterator = this.poblacion.iterator(); iterator.hasNext();) {
 			Seres ser = (Seres) iterator.next();
 			if (ser.getTipoEstado() == EstadoSer.desempleado) {
-				ser.setTipoEstado(EstadoSer.trabajador);;
+				ser.setTipoEstado(EstadoSer.trabajador);
+				;
 				lista.add(ser);
 			}
 		}
 		return lista;
-}
+	}
 
 }
