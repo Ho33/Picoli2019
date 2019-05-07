@@ -31,12 +31,13 @@ public class ParaUI extends UI {
 
 		getBtnIncrementoDemanda().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				estado.aumentarDemanda();
 			}
 		});
 
 		getBtnDecrementoDemanda().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				estado.decrementarDemanda();
 			}
 		});
 	}
