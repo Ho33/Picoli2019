@@ -365,20 +365,16 @@ public class Poblacion {
 
 	public int numeroMenores() {
 		int contador = 0;
-		for (int i = 0; i < poblacion.size(); i++) {
-			if (poblacion.get(i).getTipoEstado() == EstadoSer.menor) {
+		for (int i = 0; i < menores.size(); i++) {
 				contador++;
-			}
 		}
 		return contador;
 	}
 
 	public int numeroJubilados() {
 		int contador = 0;
-		for (int i = 0; i < poblacion.size(); i++) {
-			if (poblacion.get(i).getTipoEstado() == EstadoSer.jubilado) {
+		for (int i = 0; i < jubilados.size(); i++) {
 				contador++;
-			}
 		}
 		return contador;
 	}
