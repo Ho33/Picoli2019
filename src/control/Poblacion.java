@@ -42,7 +42,7 @@ public class Poblacion {
 		}
 		for (int i = 0; i < jubiladosInicial; i++) {
 			Seres ser = new Seres();
-			ser = new Seres(Utilies.obtenerAleatorio(18, 64), EstadoSer.jubilado);
+			ser = new Seres(Utilies.obtenerAleatorio(65, 90), EstadoSer.jubilado);
 			poblacion.add(ser);
 			menores.add(ser);
 		}
